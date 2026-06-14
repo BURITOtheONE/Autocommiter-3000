@@ -211,6 +211,7 @@
             this.done.TabIndex = 14;
             this.done.Text = "Done";
             this.done.UseVisualStyleBackColor = true;
+            this.done.Click += new System.EventHandler(this.done_Click);
             // 
             // Autocommiter3000
             // 
