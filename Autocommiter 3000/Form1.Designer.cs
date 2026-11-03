@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Autocommiter3000));
             this.Welcome = new System.Windows.Forms.Label();
             this.main_pnl = new System.Windows.Forms.Panel();
+            this.stop = new System.Windows.Forms.Button();
             this.done = new System.Windows.Forms.Button();
             this.interval = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.mail = new System.Windows.Forms.TextBox();
             this.usr = new System.Windows.Forms.TextBox();
             this.logo_large = new System.Windows.Forms.PictureBox();
-            this.stop = new System.Windows.Forms.Button();
             this.main_pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo_large)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +81,16 @@
             this.main_pnl.Name = "main_pnl";
             this.main_pnl.Size = new System.Drawing.Size(504, 331);
             this.main_pnl.TabIndex = 1;
+            // 
+            // stop
+            // 
+            this.stop.Location = new System.Drawing.Point(322, 285);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(177, 43);
+            this.stop.TabIndex = 15;
+            this.stop.Text = "Stop Autocomitter";
+            this.stop.UseVisualStyleBackColor = true;
+            this.stop.Click += new System.EventHandler(this.stop_Click);
             // 
             // done
             // 
@@ -221,15 +231,6 @@
             this.logo_large.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logo_large.TabIndex = 2;
             this.logo_large.TabStop = false;
-            // 
-            // stop
-            // 
-            this.stop.Location = new System.Drawing.Point(322, 285);
-            this.stop.Name = "stop";
-            this.stop.Size = new System.Drawing.Size(177, 43);
-            this.stop.TabIndex = 15;
-            this.stop.Text = "Stop Autocomitter";
-            this.stop.UseVisualStyleBackColor = true;
             // 
             // Autocommiter3000
             // 

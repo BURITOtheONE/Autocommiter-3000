@@ -19,26 +19,43 @@ namespace Autocommiter_3000
 {
     public partial class Autocommiter3000 : Form
     {
-        public string commitMessage = "Autocommited by Autocommiter3000";
+        public string commitMessage = "Autocommited";
         public const string DEFAULTCOMMITMESSAGE = "Autocommited by Autocommiter3000";
         public string repositoryPath = @"C:\Path\To\Your\Repository"; // Change this to your repository path
         public string usrName = "YourUsername"; // Change this to your Git username
         public string email = "youremail@wtv.com"; // Change this to your Git email
         public int commitInterval = 60000; // Time interval in milliseconds (e.g., 60000ms = 1 minute)
+        public bool isRunning = false;
+        public string strCmdText;
 
         public Autocommiter3000()
         {
             InitializeComponent();
+            while(isRunning == true)
+            {
+
+            };
         }
 
         private void Welcome_Click(object sender, EventArgs e)
         {
-            
+            isRunning = true;
         }
 
         private void done_Click(object sender, EventArgs e)
         {
-            
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+
+            System.Diagnostics.ProcessStartInfo startInfo =
+                new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.FileName = "cmd.exe";
+            startInfo.WorkingDirectory = Environment.CurrentDirectory;
+            startInfo.Arguments = $"/k cd {repositoryPath} && git add -A && git commit -m '{commitMessage}' && git push origin 'main'";
+
+            process.StartInfo = startInfo;
+            process.Start();
+
         }
 
         private void usr_TextChanged(object sender, EventArgs e)
@@ -86,6 +103,11 @@ namespace Autocommiter_3000
         private void default_commit_msg_Click(object sender, EventArgs e)
         {
             msg.Text = DEFAULTCOMMITMESSAGE;
+        }
+
+        private void stop_Click(object sender, EventArgs e)
+        {
+            isRunning = false;
         }
     }
 }
