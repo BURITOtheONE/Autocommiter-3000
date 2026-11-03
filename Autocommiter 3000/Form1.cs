@@ -51,7 +51,7 @@ namespace Autocommiter_3000
 
             startInfo.FileName = "cmd.exe";
             startInfo.WorkingDirectory = Environment.CurrentDirectory;
-            startInfo.Arguments = $"/k cd {repositoryPath} && git add -A && git commit -m '{commitMessage}' && git push origin 'master'";
+            startInfo.Arguments = $"/k cd {repositoryPath} && git add -A && git commit -m '{commitMessage}' && git push origin";
 
             process.StartInfo = startInfo;
             process.Start();
