@@ -109,6 +109,7 @@
             // 
             this.interval.FormattingEnabled = true;
             this.interval.Items.AddRange(new object[] {
+            "1",
             "5",
             "10",
             "15",
