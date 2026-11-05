@@ -162,13 +162,14 @@ namespace Autocommiter_3000
                     {
                         UpdateStatus("Error: " + ex.Message);
                     }
+
+                    await Task.Delay(commitInterval);
                 }
                 else
                 {
                     UpdateStatus("Stopped");
+                    await Task.Delay(200);
                 }
-
-                    await Task.Delay(commitInterval);
             }
         }
 
