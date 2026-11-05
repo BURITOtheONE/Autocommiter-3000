@@ -19,7 +19,7 @@ namespace Autocommiter_3000
 {
     public partial class Autocommiter3000 : Form
     {
-        public string commitMessage = "Autocommited";
+        public string commitMessage = "Autocommited by Autocommiter3000";
         public const string DEFAULTCOMMITMESSAGE = "Autocommited by Autocommiter3000";
         public string repositoryPath = @"C:\Path\To\Your\Repository"; // Change this to your repository path
         public string usrName = "YourUsername"; // Change this to your Git username
@@ -51,7 +51,7 @@ namespace Autocommiter_3000
 
             startInfo.FileName = "cmd.exe";
             startInfo.WorkingDirectory = Environment.CurrentDirectory;
-            startInfo.Arguments = $"/k cd {repositoryPath} && git add -A && git commit -m '{commitMessage}' && git push origin";
+            startInfo.Arguments = $"/k cd {repositoryPath} && git config --global user.name \"{usrName}\" && git config --global user.email \"{email}\" && git add -A && git commit -m \"{commitMessage}\" && git push origin";
 
             process.StartInfo = startInfo;
             process.Start();
