@@ -96,6 +96,7 @@ namespace Autocommiter_3000
         private void stop_Click(object sender, EventArgs e)
         {
             isRunning = false;
+            UpdateStatus("Stopped");
         }
 
         private async Task MainLoop()
