@@ -106,6 +106,7 @@ namespace Autocommiter_3000
                 {
                     try
                     {
+                        UpdateStatus("Committing...");
                         using (Process process = new Process())
                         {
                             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -155,15 +156,37 @@ namespace Autocommiter_3000
                             process.Start();
                             await Task.Run(() => process.WaitForExit());
                         }
+                        UpdateStatus("Commit completed!");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        UpdateStatus("Error: " + ex.Message);
                     }
                 }
+                else
+                {
+                    UpdateStatus("Stopped");
+                }
 
-                await Task.Delay(commitInterval);
+                    await Task.Delay(commitInterval);
             }
+        }
+
+        private void UpdateStatus(string message)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => statusLabel.Text = message));
+            }
+            else
+            {
+                statusLabel.Text = message;
+            }
+        }
+
+        private void statusLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
