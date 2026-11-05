@@ -32,6 +32,7 @@ namespace Autocommiter_3000
         public Autocommiter3000()
         {
             InitializeComponent();
+            MainLoop();
             
         }
 
@@ -43,7 +44,6 @@ namespace Autocommiter_3000
         private void done_Click(object sender, EventArgs e)
         {
             isRunning = true;
-            MainLoop();
         }
 
         private void usr_TextChanged(object sender, EventArgs e)
@@ -96,26 +96,74 @@ namespace Autocommiter_3000
         private void stop_Click(object sender, EventArgs e)
         {
             isRunning = false;
-            MainLoop();
         }
 
-        public void MainLoop()
+        private async Task MainLoop()
         {
-            while (isRunning == true)
+            while (true)
             {
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                if (isRunning)
+                {
+                    try
+                    {
+                        using (Process process = new Process())
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
 
-                System.Diagnostics.ProcessStartInfo startInfo =
-                    new System.Diagnostics.ProcessStartInfo();
+                            startInfo.FileName = "git";
+                            startInfo.WorkingDirectory = repositoryPath;
+                            startInfo.Arguments =
+                                $"add -A";
 
-                startInfo.FileName = "cmd.exe";
-                startInfo.WorkingDirectory = Environment.CurrentDirectory;
-                startInfo.Arguments = $"/k cd {repositoryPath} && git config --global user.name \"{usrName}\" && git config --global user.email \"{email}\" && git add -A && git commit -m \"{commitMessage}\" && git push origin";
+                            startInfo.UseShellExecute = false;
+                            startInfo.CreateNoWindow = true;
 
-                process.StartInfo = startInfo;
-                process.Start();
-                Thread.Sleep(commitInterval);
-            };
+                            process.StartInfo = startInfo;
+                            process.Start();
+                            await Task.Run(() => process.WaitForExit());
+                        }
+
+                        using (Process process = new Process())
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+
+                            startInfo.FileName = "git";
+                            startInfo.WorkingDirectory = repositoryPath;
+                            startInfo.Arguments =
+                                $"commit -m \"{commitMessage}\"";
+
+                            startInfo.UseShellExecute = false;
+                            startInfo.CreateNoWindow = true;
+
+                            process.StartInfo = startInfo;
+                            process.Start();
+                            await Task.Run(() => process.WaitForExit());
+                        }
+
+                        using (Process process = new Process())
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+
+                            startInfo.FileName = "git";
+                            startInfo.WorkingDirectory = repositoryPath;
+                            startInfo.Arguments = "push origin";
+
+                            startInfo.UseShellExecute = false;
+                            startInfo.CreateNoWindow = true;
+
+                            process.StartInfo = startInfo;
+                            process.Start();
+                            await Task.Run(() => process.WaitForExit());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                await Task.Delay(commitInterval);
+            }
         }
     }
 }
