@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Management;
 using System.Xml.Linq;
 using System.Diagnostics;
+using System.Threading;
 
 
 
@@ -31,31 +32,18 @@ namespace Autocommiter_3000
         public Autocommiter3000()
         {
             InitializeComponent();
-            while(isRunning == true)
-            {
-
-            };
+            
         }
 
         private void Welcome_Click(object sender, EventArgs e)
         {
-            isRunning = true;
+            
         }
 
         private void done_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-
-            System.Diagnostics.ProcessStartInfo startInfo =
-                new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.FileName = "cmd.exe";
-            startInfo.WorkingDirectory = Environment.CurrentDirectory;
-            startInfo.Arguments = $"/k cd {repositoryPath} && git config --global user.name \"{usrName}\" && git config --global user.email \"{email}\" && git add -A && git commit -m \"{commitMessage}\" && git push origin";
-
-            process.StartInfo = startInfo;
-            process.Start();
-
+            isRunning = true;
+            MainLoop();
         }
 
         private void usr_TextChanged(object sender, EventArgs e)
@@ -108,6 +96,26 @@ namespace Autocommiter_3000
         private void stop_Click(object sender, EventArgs e)
         {
             isRunning = false;
+            MainLoop();
+        }
+
+        public void MainLoop()
+        {
+            while (isRunning == true)
+            {
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+
+                System.Diagnostics.ProcessStartInfo startInfo =
+                    new System.Diagnostics.ProcessStartInfo();
+
+                startInfo.FileName = "cmd.exe";
+                startInfo.WorkingDirectory = Environment.CurrentDirectory;
+                startInfo.Arguments = $"/k cd {repositoryPath} && git config --global user.name \"{usrName}\" && git config --global user.email \"{email}\" && git add -A && git commit -m \"{commitMessage}\" && git push origin";
+
+                process.StartInfo = startInfo;
+                process.Start();
+                Thread.Sleep(commitInterval);
+            };
         }
     }
 }
