@@ -29,6 +29,7 @@ namespace Autocommiter_3000
         public bool isRunning = false;
         public string strCmdText;
 
+        //komentar
         public Autocommiter3000()
         {
             InitializeComponent();
