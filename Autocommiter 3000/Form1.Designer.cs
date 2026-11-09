@@ -46,7 +46,6 @@
             this.mail = new System.Windows.Forms.TextBox();
             this.usr = new System.Windows.Forms.TextBox();
             this.logo_large = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.main_pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo_large)).BeginInit();
@@ -236,15 +235,6 @@
             this.logo_large.TabIndex = 2;
             this.logo_large.TabStop = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
-            // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
@@ -262,7 +252,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.logo_large);
             this.Controls.Add(this.main_pnl);
             this.Controls.Add(this.Welcome);
@@ -273,7 +262,6 @@
             this.main_pnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo_large)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -297,7 +285,6 @@
         private System.Windows.Forms.Button done;
         private System.Windows.Forms.Button stop;
         private System.Windows.Forms.Label statusLabel;
-        private System.Windows.Forms.Label label3;
     }
 }
 
